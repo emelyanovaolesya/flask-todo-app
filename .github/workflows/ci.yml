@@ -1,0 +1,36 @@
+name: CI Pipeline for Flask App
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run tests
+      run: |
+        pytest tests/test_app.py -v
+    
+    - name: Upload test results (if tests fail)
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: pytest-report
+        path: .pytest_cache/
