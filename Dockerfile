@@ -9,8 +9,10 @@ COPY . .
 
 RUN mkdir -p instance
 
-EXPOSE 5000
+COPY start.sh /start.sh
 
-RUN echo '#!/bin/sh\npython create_db.py\nflask run --host=0.0.0.0 --port=5000' > /start.sh && chmod +x /start.sh
+RUN chmod +x /start.sh
+
+EXPOSE 5000
 
 CMD ["/start.sh"]
