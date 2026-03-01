@@ -9,9 +9,12 @@ COPY . .
 
 RUN mkdir -p instance
 
-COPY start.sh /start.sh
-
-RUN chmod +x /start.sh
+RUN echo '#!/bin/sh' > /start.sh && \
+    echo 'echo "Creating database"' >> /start.sh && \
+    echo 'python create_db.py' >> /start.sh && \
+    echo 'echo "Starting Flask app"' >> /start.sh && \
+    echo 'flask run --host=0.0.0.0 --port=5000' >> /start.sh && \
+    chmod +x /start.sh
 
 EXPOSE 5000
 
