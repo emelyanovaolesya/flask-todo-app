@@ -1,0 +1,23 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# Database
+*.db
+*.sqlite
+instance/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# IDE
+.idea/
