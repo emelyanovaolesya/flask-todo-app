@@ -1,5 +1,11 @@
+# create_db.py
 from app import app, db
 
-with app.app_context():
-    db.create_all()
-    print("Таблицы базы данных успешно созданы!")
+def create_database():
+    with app.app_context():
+        db.create_all()
+        print("Успешно")
+        return True
+
+if __name__ == '__main__':
+    create_database()
